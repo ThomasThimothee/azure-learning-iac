@@ -1,0 +1,31 @@
+name: Deploy Bicep to Azure
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: 4fa1b12c-15e0-44ab-9c68-9405fd372f69
+          tenant-id: f69f2189-c9e9-48d3-8b41-2755cd840320
+          subscription-id: 49354364-31b4-43e6-a8fa-191c1d82f3de
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          resourceGroupName: rg-learning-dev
+          template: ./main.bicep
+          parameters: storageAccountName=stlablearning001 keyVaultName=learning-dev-keyvault-83140 webAppName=learning-dev-webapp-83140
