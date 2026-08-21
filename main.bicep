@@ -39,3 +39,12 @@ resource kvSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' 
     principalType: 'ServicePrincipal'
   }
 }
+
+resource storageAccount2 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+  name: 'githubactioncreated'
+  location: location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+}
