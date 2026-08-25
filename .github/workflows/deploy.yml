@@ -28,4 +28,4 @@ jobs:
           scope: resourcegroup
           resourceGroupName: rg-learning-dev
           template: ./main.bicep
-          parameters: storageAccountName=stlablearning001 keyVaultName=learningkeyvault-83140 webAppName=learning-dev-webapp-83140
+          parameters: storageAccountName=stlablearning001 keyVaultName=learningkeyvault-83140 webAppName=learning-dev-webapp-83140  serviceBusNamespaceName=learning-dev-servbus-83140
