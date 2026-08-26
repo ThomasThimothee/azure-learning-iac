@@ -50,8 +50,6 @@ resource storageAccount2 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 
 
-param serviceBusNamespaceName string
-
 resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2022-01-01-preview' = {
   name: serviceBusNamespaceName
   location: location
@@ -71,8 +69,8 @@ resource orderQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' 
 }
 
 resource sbDataSenderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(serviceBusNamespace.id, webApp.id, 'ServiceBusDataSender')
-  scope: serviceBusNamespace
+  name: guid(orderQueue.id, webApp.id, 'ServiceBusDataSender')
+  scope: orderQueue
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '69a216fc-b8fb-44d8-bc22-1f3c2cd27a39')
     principalId: webApp.identity.principalId
