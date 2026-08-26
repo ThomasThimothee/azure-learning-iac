@@ -12,6 +12,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 param keyVaultName string
 param webAppName string
+param serviceBusNamespaceName string
 
 resource webApp 'Microsoft.Web/sites@2023-01-01' existing = {
   name: webAppName
