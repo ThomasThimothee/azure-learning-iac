@@ -31,6 +31,14 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
+resource welcomeSecret 'Microsoft.KeyVault/secrets@2023-02-01' = {
+  parent: keyVault
+  name: 'welcome-message'
+  properties: {
+    value: 'Hello from Key Vault, delivered via managed identity'
+  }
+}
+
 resource kvSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(keyVault.id, webApp.id, 'KeyVaultSecretsUser')
   scope: keyVault
@@ -78,3 +86,4 @@ resource sbDataSenderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' =
     principalType: 'ServicePrincipal'
   }
 }
+
