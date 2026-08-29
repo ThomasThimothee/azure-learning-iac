@@ -31,7 +31,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-resource welcomeSecret 'Microsoft.KeyVault/secrets@2023-02-01' = {
+resource welcomeSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'welcome-message'
   properties: {
