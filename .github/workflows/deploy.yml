@@ -29,3 +29,17 @@ jobs:
           resourceGroupName: rg-learning-dev
           template: ./main.bicep
           parameters: storageAccountName=stlablearning001 keyVaultName=learningkeyvault-83140 webAppName=learning-dev-webapp-83140  serviceBusNamespaceName=learning-dev-servbus-83140
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish app
+        run: dotnet publish ./webapp/WelcomeApp/WelcomeApp.csproj -c Release -o ./publish
+
+      - name: Deploy to App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: learning-dev-webapp-83140
+          package: ./publish
